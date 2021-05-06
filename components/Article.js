@@ -115,7 +115,7 @@ const data = [
   Refresh the page to see the new article.
 */
 
-function articelMaker(data) {
+function articelMaker(article) {
   const div1 = document.createElement('div')
   div1.classList.add('article')
   const h22 = document.createElement('h2')
@@ -136,7 +136,6 @@ function articelMaker(data) {
   const span1 = document.createElement('span')
   span1.classList.add('expandButton')
   p4.appendChild(span1)
-
-  
+  span1.addEventListener('toggle', article)
 
 }

@@ -115,27 +115,55 @@ const data = [
   Refresh the page to see the new article.
 */
 
-function articelMaker(article) {
-  const div1 = document.createElement('div')
-  div1.classList.add('article')
-  const h22 = document.createElement('h2')
-  h22.textContent = data.title
-  div1.appendChild(h22)
-  const p1 = document.createElement('p')
-  p1.textContent = data.date
-  h22.appendChild(p1)
-  const p2 = document.createElement('p')
-  p2.textContent = data.firstParagraph
-  p1.appendChild(p2)
-  const p3 = document.createElement('p')
-  p3.textContent = data.secondParagraph
-  p3.appendChild(p3)
-  const p4 = document.createElement('p')
-  p4.textContent = data.thirdParagraph
-  p3.appendChild(p4)
-  const span1 = document.createElement('span')
-  span1.classList.add('expandButton')
-  p4.appendChild(span1)
-  span1.addEventListener('toggle', article)
 
-}
+// ForEach method to go over each item
+const articleCont = document.querySelector('.articles');
+
+data.forEach(data => {
+  articleCont.appendChild(createArticleComponent(data));
+});
+
+// New function to create structure
+function createArticleComponent(articleInfo) {
+  // Define new elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstPar = document.createElement('p');
+  const secondPar = document.createElement('p');
+  const thirdPar = document.createElement('p');
+  const articleButton = document.createElement('span');
+
+  //Append elements to the DOM
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(firstPar);
+  article.appendChild(secondPar);
+  article.appendChild(thirdPar);
+  article.appendChild(articleButton);
+
+  // Set text content & img src
+  articleTitle.textContent = articleInfo.title;
+  articleDate.textContent = articleInfo.date;
+  firstPar.textContent = articleInfo.firstParagraph;
+  secondPar.textContent = articleInfo.secondParagraph;
+  thirdPar.textContent = articleInfo.thirdParagraph;
+  articleButton.textContent = 'Read More';
+
+  // Add classes
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  articleButton.classList.add('expandButton');
+
+  // Add evebt handler for button
+  articleButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+    if (articleButton.innerText === 'Read More') {
+      articleButton.textContent = 'Read Less';
+    } else {
+      articleButton.textContent = 'Read More';
+    }
+  });
+
+  return article;
+};
